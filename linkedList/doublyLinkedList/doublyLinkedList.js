@@ -142,6 +142,26 @@ class DoublyLinkedList {
     this.head = this.tail;
     this.tail = currentNode;
   }
+  swap(index1, index2) {
+    if (!this.head) return false;
+    if (
+      index1 < 0 ||
+      index2 < 0 ||
+      index1 >= this.length ||
+      index2 >= this.length
+    )
+      return false;
+    if (index1 == index2) return true;
+
+    var firstNode = this.get(index1);
+    var secondNode = this.get(index2);
+
+    var temp = firstNode.val;
+    firstNode.val = secondNode.val;
+    secondNode.val = temp;
+
+    return true;
+  }
   traverse() {
     var current = this.head;
 
