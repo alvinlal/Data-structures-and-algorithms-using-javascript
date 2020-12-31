@@ -31,6 +31,7 @@ class MaxBinaryHeap {
     var idx = 0;
     const length = this.values.length;
     const element = this.values[0];
+
     while (true) {
       var leftChildIdx = 2 * idx + 1;
       var rightChildIdx = 2 * idx + 2;
@@ -67,3 +68,11 @@ heap.insert(18);
 heap.insert(27);
 heap.insert(12);
 heap.insert(55);
+
+console.log(heap.extractMax());
+console.log(heap.extractMax());
+console.log(heap.extractMax());
+console.log(heap.extractMax());
+console.log(heap.extractMax());
+console.log(heap.extractMax());
+console.log(heap.extractMax());
