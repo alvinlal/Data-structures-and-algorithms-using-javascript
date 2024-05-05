@@ -1,21 +1,22 @@
-function radixSort(nums) {
-  let maxDigitsCount = mostDigits(nums);
+function radixSort(arr) {
+  // 1. get the number with mostDigits from the array
+  const maxDigitsNum = mostDigits(arr);
 
-  for (let k = 0; k < maxDigitsCount; k++) {
-    let digitBuckets = Array.from({ length: 10 }, () => []);
-    for (let i = 0; i < nums.length; i++) {
-      let digit = getDigit(nums[i], k);
-      digitBuckets[digit].push(nums[i]);
+  for (let k = 0; k < maxDigitsNum; k++) {
+    let digitsBucket = Array.from({ length: 10 }, () => []);
+
+    for (let i = 0; i < arr.length; i++) {
+      let digit = getDigit(arr[i], k);
+      digitsBucket[digit].push(arr[i]);
     }
-    nums = [].concat(...digitBuckets);
+    arr = [].concat(...digitsBucket);
   }
-  return nums;
+
+  return arr;
 }
 
-console.log(radixSort([5555, 11, 1, 2, 3, 122, 33, 444, 444]));
-
-function getDigit(num, i) {
-  return Math.floor(Math.abs(num) / Math.pow(10, i)) % 10;
+function getDigit(num, pos) {
+  return Math.floor(Math.abs(num) / Math.pow(10, pos)) % 10;
 }
 
 function digitCount(num) {
@@ -23,14 +24,12 @@ function digitCount(num) {
   return Math.floor(Math.log10(Math.abs(num))) + 1;
 }
 
-function mostDigits(nums) {
+function mostDigits(arr) {
   let maxDigits = 0;
-  for (let i = 0; i < nums.length; i++) {
-    maxDigits = Math.max(maxDigits, digitCount(nums[i]));
+  for (let i = 0; i < arr.length; i++) {
+    maxDigits = Math.max(maxDigits, digitCount(arr[i]));
   }
   return maxDigits;
 }
 
-// console.log(getDigit(1234, 3));
-// console.log(digitCount(1234));
-// console.log(mostDigits([1, 2, 3, 12345]));
+console.log(radixSort([5555, 11, 1, 2, 3, 122, 33, 444, 444]));

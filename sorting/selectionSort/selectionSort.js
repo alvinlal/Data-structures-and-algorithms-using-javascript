@@ -6,13 +6,14 @@ function selectionSort(arr) {
         lowest = j;
       }
     }
-    if (lowest !== i) {
+    if (lowest != i) {
       var temp = arr[i];
       arr[i] = arr[lowest];
       arr[lowest] = temp;
     }
   }
+
   return arr;
 }
 
-console.log(selectionSort([8, 17, 4, 2, 10, 7, 3, 4, 6, 5]));
+console.log(selectionSort([56, 23, 12, 67, 423, 5, 3, 22, 1]));

@@ -1,21 +1,19 @@
 function mergeSort(arr) {
   if (arr.length <= 1) return arr;
 
-  var mid = Math.floor(arr.length / 2);
-  var left = mergeSort(arr.slice(0, mid));
-  var right = mergeSort(arr.slice(mid));
+  const mid = Math.floor(arr.length / 2);
+  const left = mergeSort(arr.slice(0, mid));
+  const right = mergeSort(arr.slice(mid));
   return merge(left, right);
 }
 
-console.log(mergeSort([10, 24, 76, 73, 12, 25, 28, 99]));
-
 function merge(arr1, arr2) {
-  var result = [];
-  var i = 0;
-  var j = 0;
+  let i = 0;
+  let j = 0;
+  const result = [];
 
   while (i < arr1.length && j < arr2.length) {
-    if (arr2[j] > arr1[i]) {
+    if (arr1[i] < arr2[j]) {
       result.push(arr1[i]);
       i++;
     } else {
@@ -23,10 +21,12 @@ function merge(arr1, arr2) {
       j++;
     }
   }
+
   while (i < arr1.length) {
     result.push(arr1[i]);
     i++;
   }
+
   while (j < arr2.length) {
     result.push(arr2[j]);
     j++;
@@ -34,3 +34,5 @@ function merge(arr1, arr2) {
 
   return result;
 }
+
+console.log(mergeSort([56, 23, 12, 67, 423, 5, 3, 22, 1]));
