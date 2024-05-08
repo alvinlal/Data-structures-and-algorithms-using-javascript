@@ -1,0 +1,15 @@
+{
+  "name": "data-structures-and-algorithms-using-javascript",
+  "version": "1.0.0",
+  "description": "A set of data structures and algoritms using javascript",
+  "type": "module",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
