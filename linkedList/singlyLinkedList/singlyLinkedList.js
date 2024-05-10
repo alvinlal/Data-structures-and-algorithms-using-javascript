@@ -13,11 +13,6 @@ class SinglyLinkedList {
   }
 
   push(val) {
-    // 1. create a new node newNode
-    // 2. if length is 0, head = tail = newNode
-    // 3. else this.tail.next = newNode and this.tail newNode
-    // 4. increment length
-
     const newNode = new Node(val);
 
     if (this.length == 0) {
@@ -34,15 +29,7 @@ class SinglyLinkedList {
   }
 
   pop() {
-    // this should remove item at the end
-    // 1. if length is 0, return undefined
-    // 2. else traverse the list until the node just before the tail is reached
-    // 3. node just before tail.next = null
-    // 4. decrement length
-    // 5. if the length has become 0, make head and tail null
-    // 5. return the popped node
-
-    if (this.length == 0) return undefined;
+    if (this.length == 0) return false;
 
     var current = this.head;
     var previous = current;
@@ -53,13 +40,14 @@ class SinglyLinkedList {
     }
 
     previous.next = null;
+
     this.tail = previous;
 
     this.length--;
 
     if (this.length == 0) {
-      this.head = null;
       this.tail = null;
+      this.head = null;
     }
 
     return current;
@@ -67,34 +55,36 @@ class SinglyLinkedList {
 
   shift() {
     if (this.length == 0) return false;
-    var current = this.head;
-    this.head = this.head.next;
+
+    var oldHead = this.head;
+    this.head = oldHead.next;
+
     this.length--;
 
     if (this.length == 0) {
-      this.head = null;
       this.tail = null;
+      this.head = null;
     }
 
-    return current;
+    return oldHead;
   }
 
   unshift(val) {
     const newNode = new Node(val);
+
     if (this.length == 0) {
       this.head = newNode;
       this.tail = newNode;
-    } else {
-      newNode.next = this.head;
-      this.head = newNode;
     }
 
+    newNode.next = this.head;
+    this.head = newNode;
+
     this.length++;
-    return this;
   }
 
   get(pos) {
-    if (pos < 0 || pos > this.length) return;
+    if (pos < 0 || pos > this.length) return false;
     if (pos == 0) return this.head;
     if (pos == this.length) return this.tail;
 
@@ -109,46 +99,48 @@ class SinglyLinkedList {
     return current;
   }
 
+  set(pos, val) {
+    if (pos < 0 || pos > this.length) return false;
+
+    var node = this.get(pos);
+    node.val = val;
+
+    return node;
+  }
+
   insertAt(pos, val) {
     if (pos < 0 || pos > this.length) return false;
     if (pos == 0) return !!this.unshift(val);
     if (pos == this.length) return !!this.push(val);
 
     const newNode = new Node(val);
-    var previousNode = this.get(pos - 1);
+    var nodeBefore = this.get(pos - 1);
+    var nodeAtPos = this.get(pos);
 
-    var tempNode = previousNode.next;
-    previousNode.next = newNode;
-    newNode.next = tempNode;
+    nodeBefore.next = newNode;
+    newNode.next = nodeAtPos;
 
     this.length++;
+
     return true;
   }
 
   deleteAt(pos) {
     if (pos < 0 || pos >= this.length) return false;
     if (pos == 0) return !!this.shift();
-    if (pos == this.length - 1) return !!this.pop();
+    if (pos == this.length) return !!this.pop();
 
-    var prevNode = this.get(pos - 1);
+    var nodeBefore = this.get(pos - 1);
 
-    prevNode.next = prevNode.next.next;
+    nodeBefore.next = nodeBefore.next.next;
 
     this.length--;
 
     return true;
   }
 
-  set(pos, val) {
-    if (pos < 0 || pos >= this.length) return false;
-
-    var node = this.get(pos);
-    node.val = val;
-    return true;
-  }
-
   swap(pos1, pos2) {
-    if (pos1 < 0 || pos2 < 0 || pos1 >= this.length || pos2 >= this.length) return false;
+    if (pos1 < 0 || pos2 < 0 || pos2 >= this.length || pos1 >= this.length) return false;
 
     if (pos1 == pos2) return true;
 
