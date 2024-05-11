@@ -11,29 +11,33 @@ class Stack {
     this.last = null;
     this.size = 0;
   }
+
   push(val) {
-    var newNode = new Node(val);
-    if (!this.first) {
+    const newNode = new Node(val);
+
+    if (this.size == 0) {
       this.first = newNode;
       this.last = newNode;
-    } else {
-      var temp = this.first;
-      this.first = newNode;
-      newNode.next = temp;
     }
+
+    newNode.next = this.first;
+    this.first = newNode;
 
     return ++this.size;
   }
+
   pop() {
-    if (!this.first) return null;
+    if (this.size == 0) return null;
     var popedNode = this.first;
-    if (this.first === this.last) {
+
+    if (this.first == this.last) {
       this.last = null;
     }
+
     this.first = this.first.next;
     this.size--;
     return popedNode.val;
   }
 }
 
-var stack = new Stack();
+module.exports = Stack;
