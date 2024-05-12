@@ -180,16 +180,16 @@ class DoublyLinkedList {
     var currentNode = this.head;
     var nextNode;
 
+    currentNode = this.head;
+    this.head = this.tail;
+    this.tail = currentNode;
+
     while (currentNode != null) {
       nextNode = currentNode.next;
       currentNode.next = currentNode.prev;
       currentNode.prev = nextNode;
       currentNode = nextNode;
     }
-
-    currentNode = this.head;
-    this.head = this.tail;
-    this.tail = currentNode;
   }
 
   getList() {
